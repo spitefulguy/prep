@@ -29,6 +29,19 @@ void CMP::printResult(list <Finding> findings) {
 	}
 }
 
+void CMP::printResult(vector <Finding> findings) {
+	if (!findings.size()) return;
+
+	vector <Finding>::iterator it = findings.begin();
+
+	while ( it != findings.end() ){
+
+		cout << (*it).preposition_1 << "/" << (*it).preposition_2 << " " << (*it).noun << "\n";
+		cout << (*it).sentence_1 << "\n" << (*it).sentence_2 << "\n\n";
+		it++;
+	}
+}
+
 list<Phrase> CMP::getPhrase(boost::filesystem::path path){
 
 		list <Phrase> list_Phrase;
@@ -133,7 +146,7 @@ list <Finding> CMP::findIntersection(list<Phrase> list_1, list<Phrase> list_2) {
 	list <Phrase>::iterator it_2;
 	it_1 = list_1.begin();
 	it_2 = list_2.begin();
-	ssize_t count = 0;
+	//ssize_t count = 0;
 
 	while (it_1 != list_1.end()) {
 		it_2 = list_2.begin();
@@ -150,6 +163,20 @@ list <Finding> CMP::findIntersection(list<Phrase> list_1, list<Phrase> list_2) {
 
 				finding.sentence_2 = (*it_2).sentence;
 				finding.preposition_2 = (*it_2).preposition;
+
+//				if ( (*it_1).preposition < (*it_2).preposition ) {
+//					finding.preposition_1 = (*it_1).preposition;
+//					finding.sentence_1 = (*it_1).sentence;
+//
+//					finding.sentence_2 = (*it_2).sentence;
+//					finding.preposition_2 = (*it_2).preposition;
+//				} else {
+//					finding.preposition_1 = (*it_2).preposition;
+//					finding.sentence_1 = (*it_2).sentence;
+//
+//					finding.sentence_2 = (*it_1).sentence;
+//					finding.preposition_2 = (*it_1).preposition;
+//				}
 
 				result.push_back(finding);
 			}

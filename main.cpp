@@ -13,6 +13,7 @@
 
 #include "wclasses.hpp"
 #include "cmp.hpp"
+#include "stats.hpp"
 
 #define PATH_1 "../resources/BE/"
 #define PATH_2 "../resources/AE/"
@@ -91,21 +92,30 @@ int main(int argc, char *argv[]) {
 	cout << endl;
 	iterator_2 = iterator_2_start;
 
-	list <Finding> result;
+	//vector <Finding> result;
+	list <Finding> t;
+	Stats stats;
 	while (iterator_1 != directory_iterator()) {
 		while (iterator_2 != directory_iterator()) {
 				cout << "\nComparing " << *iterator_1 << " --- " << *iterator_2 << "\n";
-				result = cmp.compare((*iterator_1).path() , (*iterator_2).path());
-				cmp.printResult(result);
+				t = cmp.compare((*iterator_1).path() , (*iterator_2).path());
+				stats.addElements(t);
 				iterator_2++;
 			}
 		directory_iterator it_0(p_dir_texts_2);
 		iterator_2 = it_0;
 		iterator_1++;
 	}
+	//sort(result.begin(), result.end(), findingCompare);
+	//stats.getElements();
+	cout << "Differences found total: " << stats.size() << endl;
+	cmp.printResult(stats.getElements());
+
 
 	return 0;
 
 }
+
+
 
 

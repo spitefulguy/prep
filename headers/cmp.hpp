@@ -52,6 +52,7 @@ public:
 	CMP(WClasses *wclasses);
 	std::list <Finding> compare(boost::filesystem::path file1, boost::filesystem::path file2);
 	void printResult(std::list <Finding>);
+	void printResult(std::vector <Finding>);
 
 private:
 	std::list <Finding> findIntersection(std::list<Phrase>, std::list<Phrase>);
